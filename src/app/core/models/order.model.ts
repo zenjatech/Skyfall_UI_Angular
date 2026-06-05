@@ -21,6 +21,7 @@ export interface Order {
   placedByStaffId: string | null;
   placedByStaffName: string | null;
   status: 'pending' | 'confirmed' | 'preparing' | 'ready' | 'served' | 'cancelled';
+  isPaid: boolean;
   orderType: string;
   subtotal: number;
   taxAmount: number;

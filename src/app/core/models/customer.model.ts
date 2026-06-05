@@ -6,6 +6,7 @@ export interface Customer {
   birthday: string | null;
   anniversary: string | null;
   specialEventDate: string | null;
+  specialEventName: string | null;
   visitCount: number;
   totalSpent: number;
   lastVisit: string | null;
