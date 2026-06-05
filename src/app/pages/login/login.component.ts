@@ -28,12 +28,9 @@ import { environment } from '../../../environments/environment';
       padding: 32px 32px 0;
       display: flex; flex-direction: column; align-items: center; gap: 4px;
     }
-    .logo-circle {
-      width: 52px; height: 52px;
-      border-radius: 50%;
-      border: 2px solid #B8923A;
-      background: #FBF6EC;
-      display: flex; align-items: center; justify-content: center;
+    .brand-logo {
+      width: 96px; height: 96px;
+      object-fit: contain;
       margin-bottom: 4px;
     }
     .brand-name {
@@ -103,12 +100,7 @@ import { environment } from '../../../environments/environment';
     <div class="login-wrap">
       <div class="login-card">
         <div class="card-top">
-          <div class="logo-circle">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-              <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="#B8923A"/>
-            </svg>
-          </div>
-          <div class="brand-name">SKYFALL</div>
+          <img class="brand-logo" src="assets/logo.jpg" alt="Skyfall Lounge">
           <div class="brand-portal">Staff Portal</div>
         </div>
 
