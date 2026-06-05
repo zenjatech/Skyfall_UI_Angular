@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'https://<your-function-app>.azurewebsites.net/api',
+  apiBaseUrl: 'https://skyfall-service-djg0fvaucmf4chgw.centralindia-01.azurewebsites.net/api',
   defaultTenantId: 'skyfall',
   devBypass: null as { tenantId: string; email: string; password: string } | null
 };
