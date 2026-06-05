@@ -80,13 +80,9 @@ const PAGE_TITLES: Record<string, string> = {
       padding: 0 20px;
       flex-shrink: 0;
     }
-    .brand-circle {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      border: 1.5px solid #B8923A;
-      background: #FBF6EC;
-      color: #B8923A;
-      display: flex; align-items: center; justify-content: center;
+    .brand-logo {
+      width: 44px; height: 44px;
+      object-fit: contain;
       flex-shrink: 0;
     }
     .brand-name {
@@ -293,9 +289,7 @@ const PAGE_TITLES: Record<string, string> = {
     <!-- Sidebar -->
     <aside class="sidebar">
       <div class="brand">
-        <div class="brand-circle">
-          <app-icon name="star" [size]="17" [sw]="1.8"></app-icon>
-        </div>
+        <img class="brand-logo" src="assets/logo.jpg" alt="Skyfall Lounge">
         <div>
           <div class="brand-name">SKYFALL</div>
           <div class="brand-sub">LOUNGE</div>

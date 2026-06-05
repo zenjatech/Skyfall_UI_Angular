@@ -26,6 +26,7 @@ const STEPS: Array<{ status: DisplayStatus; label: string; icon: string }> = [
     :host { display: block; min-height: 100vh; background: var(--background); }
     .track { max-width: 720px; margin: 0 auto; padding: 18px 16px 32px; }
     .brand { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
+    .brand-logo { width: 48px; height: 48px; object-fit: contain; }
     .brand-name { font-family: var(--font-heading); font-size: 22px; font-weight: 700; letter-spacing: .08em; color: var(--gold); }
     .live { display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--gold-border); background: var(--white); border-radius: 999px; padding: 5px 10px; color: var(--muted); font-size: 11px; }
     .live span { width: 7px; height: 7px; border-radius: 50%; background: var(--success); }
@@ -71,6 +72,7 @@ const STEPS: Array<{ status: DisplayStatus; label: string; icon: string }> = [
         color: #000;
       }
       .bp-header { text-align: center; margin-bottom: 10px; }
+      .bp-logo { width: 72px; height: 72px; object-fit: contain; display: block; margin: 0 auto 6px; }
       .bp-name { font-size: 18px; font-weight: 700; letter-spacing: .12em; }
       .bp-tagline { font-size: 10px; letter-spacing: .06em; margin-top: 2px; }
       .bp-sub { font-size: 11px; margin-top: 3px; }
@@ -89,7 +91,7 @@ const STEPS: Array<{ status: DisplayStatus; label: string; icon: string }> = [
   template: `
     <main class="track">
       <header class="brand">
-        <div class="brand-name">SKYFALL</div>
+        <img class="brand-logo" src="assets/logo.jpg" alt="Skyfall Lounge">
         <div class="live"><span class="live-dot"></span>{{ polling() ? 'Live updates' : 'Offline' }}</div>
       </header>
 
@@ -175,8 +177,8 @@ const STEPS: Array<{ status: DisplayStatus; label: string; icon: string }> = [
         <!-- Hidden receipt rendered only during print -->
         <section class="bill-print">
           <div class="bp-header">
+            <img class="bp-logo" src="assets/logo.jpg" alt="Skyfall Lounge">
             <div class="bp-name">{{ settingsSvc.cafeName() }}</div>
-            <div class="bp-tagline">LOUNGE</div>
             @if (settingsSvc.address()) { <div class="bp-sub">{{ settingsSvc.address() }}</div> }
             @if (settingsSvc.phone()) { <div class="bp-sub">{{ settingsSvc.phone() }}</div> }
           </div>
