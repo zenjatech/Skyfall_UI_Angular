@@ -114,7 +114,7 @@ import { environment } from '../../../environments/environment';
               <label for="tenantId">Tenant ID</label>
               <input id="tenantId" type="text" class="field-input"
                      [(ngModel)]="tenantId" name="tenantId"
-                     placeholder="Enter tenant ID" required />
+                     placeholder="Skyf" required />
             </div>
 
             <div class="field">
@@ -156,7 +156,7 @@ export class LoginComponent implements OnInit {
   private auth = inject(AuthService);
   private router = inject(Router);
 
-  tenantId = '';
+  tenantId = environment.defaultTenantId;
   email = '';
   password = '';
   showPw = false;
