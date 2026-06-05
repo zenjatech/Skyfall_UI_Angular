@@ -89,7 +89,7 @@ interface CartLine {
               @for (item of filteredItems(); track item.id) {
                 <article class="qr-menu-card" [class.unavailable]="!item.isAvailable">
                   <div class="qr-menu-card-media">
-                    @if (item.imageUrl) {
+                    @if (isImageUrl(item.imageUrl)) {
                       <img [src]="item.imageUrl" [alt]="item.name" />
                     } @else {
                       <span class="qr-menu-emoji">{{ getEmoji(item) }}</span>
@@ -425,6 +425,10 @@ export class CustomerMenuComponent implements OnInit {
 
   formatPrice(amount: number): string {
     return `Rs ${Math.round(amount)}`;
+  }
+
+  isImageUrl(url: string | null | undefined): boolean {
+    return !!url && (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('/'));
   }
 
   getEmoji(item: MenuItem): string {
