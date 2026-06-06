@@ -91,6 +91,18 @@ const STATUS_CFG: Record<string, { label: string; badgeBg: string; badgeColor: s
     .sk-card { background: #fff; border: 1.5px solid #E8DBBF; border-radius: 12px; overflow: hidden; }
     .sk-head { background: #FBF6EC; padding: 9px 14px; border-bottom: 1px solid #E8DBBF; }
     .sk-line { height: 12px; border-radius: 4px; background: #E8DBBF; }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .kit-head         { flex-direction: column; align-items: flex-start; gap: 10px; padding: 10px 14px; }
+      .clock-wrap       { display: none; }
+      .kit-title        { font-size: 18px; }
+      .autoprint-btn    { font-size: 10px; padding: 4px 10px; }
+      .kot-grid         { padding: 10px; gap: 10px; }
+    }
+    @media (max-width: 400px) {
+      .kot-grid         { grid-template-columns: 1fr; }
+    }
   `],
   template: `
     <div class="wrap">

@@ -284,10 +284,54 @@ const PAGE_TITLES: Record<string, string> = {
     .page-body {
       padding: 24px;
     }
+
+    /* ── Mobile hamburger ── */
+    .hamburger {
+      display: none;
+      width: 36px; height: 36px;
+      align-items: center; justify-content: center;
+      border: 1px solid #E8DBBF;
+      border-radius: 8px;
+      background: #fff;
+      cursor: pointer;
+      color: #7A7060;
+      flex-shrink: 0;
+      transition: background .12s;
+      &:hover { background: #FBF6EC; color: #8A6A24; }
+    }
+
+    .sidebar-backdrop {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(26,26,26,0.4);
+      z-index: 39;
+    }
+    .sidebar-backdrop.open { display: block; }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        transform: translateX(-220px);
+        transition: transform 0.25s ease;
+        z-index: 50;
+      }
+      .sidebar.open { transform: translateX(0); }
+      .hamburger    { display: flex; }
+      .topbar       { left: 0; }
+      .main-content { margin-left: 0; }
+      .period-toggle, .date-chip { display: none; }
+      .page-title   { font-size: 16px; }
+      .page-body    { padding: 14px; }
+    }
+
+    @media (max-width: 480px) {
+      .topbar       { padding: 0 14px; }
+    }
   `],
   template: `
+    <div class="sidebar-backdrop" [class.open]="sidebarOpen()" (click)="sidebarOpen.set(false)"></div>
+
     <!-- Sidebar -->
-    <aside class="sidebar">
+    <aside class="sidebar" [class.open]="sidebarOpen()">
       <div class="brand">
         <img class="brand-logo" src="assets/logo.jpg" alt="Skyfall Lounge">
         <div>
@@ -303,7 +347,8 @@ const PAGE_TITLES: Record<string, string> = {
             @for (item of group.items; track item.route) {
               <a class="nav-item"
                  [routerLink]="item.route"
-                 routerLinkActive="active">
+                 routerLinkActive="active"
+                 (click)="sidebarOpen.set(false)">
                 <app-icon [name]="item.icon" [size]="16" [sw]="1.8"></app-icon>
                 <span class="nav-item-inner">
                   <span class="nav-label">{{ item.label }}</span>
@@ -342,6 +387,9 @@ const PAGE_TITLES: Record<string, string> = {
 
     <!-- Topbar -->
     <header class="topbar">
+      <button class="hamburger" (click)="sidebarOpen.set(!sidebarOpen())" aria-label="Toggle menu">
+        <app-icon name="menu" [size]="18" [sw]="1.8"></app-icon>
+      </button>
       <h1 class="page-title">{{ pageTitle }}</h1>
       <div class="topbar-right">
         <div class="date-chip">{{ today }}</div>
@@ -374,6 +422,7 @@ export class ShellComponent implements OnInit, OnDestroy {
   readonly user$   = this.auth.user$;
   readonly userRole = this.auth.currentUser?.role ?? 'admin';
   period: 'Today' | 'Week' | 'Month' = 'Today';
+  sidebarOpen = signal(false);
 
   visibleNavGroups = computed(() => {
     const role = this.auth.currentUser?.role ?? 'admin';

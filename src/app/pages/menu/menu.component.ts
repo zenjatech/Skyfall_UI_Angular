@@ -88,6 +88,23 @@ import { IconComponent } from '../../core/components/icon.component';
     @keyframes spin { to { transform: rotate(360deg); } }
     .empty-state { padding: 48px 24px; text-align: center; color: #7A7060; font-size: 13px; }
 
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .stats-bar         { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 720px) {
+      .stats-bar         { grid-template-columns: repeat(2, 1fr); }
+      .menu-layout       { grid-template-columns: 1fr; }
+      .cat-list          { flex-direction: row; overflow-x: auto; flex-wrap: nowrap; padding: 8px 6px; gap: 6px; }
+      .cat-btn           { flex-shrink: 0; width: auto; white-space: nowrap; }
+      .page-header       { flex-wrap: wrap; gap: 10px; }
+      .header-actions    { flex-wrap: wrap; }
+    }
+    @media (max-width: 480px) {
+      .stats-bar         { grid-template-columns: 1fr; }
+      .items-grid        { grid-template-columns: 1fr; }
+    }
+
     /* Modal */
     .modal-backdrop { position: fixed; inset: 0; background: rgba(26,26,26,.45); display: flex; align-items: center; justify-content: center; z-index: 100; animation: fadeIn .15s ease-out; }
     @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }

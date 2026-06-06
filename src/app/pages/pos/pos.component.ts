@@ -188,6 +188,36 @@ type PosTable = CafeTable & { orderId?: string; seatedAt?: string };
     .invoice-note { border-radius: 999px; background: #EBF7ED; color: #2A7A3A; padding: 6px 14px; font-size: 12px; font-weight: 600; }
     .done-btn { width: 160px; height: 44px; border: none; border-radius: 8px; background: #B8923A; color: #fff; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 8px; font-family: var(--font-body); }
 
+    /* ── Mobile tab bar ── */
+    .mob-tab-bar {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 25;
+      background: #fff; border-top: 1px solid #E8DBBF; height: 52px;
+    }
+    .mob-tab-btn {
+      flex: 1; height: 100%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 3px; border: none; background: none; cursor: pointer;
+      color: #7A7060; font-size: 10px; font-weight: 500; font-family: var(--font-body);
+      transition: color .12s;
+      &.active { color: #B8923A; }
+    }
+
+    @media (max-width: 768px) {
+      .pos          { padding-bottom: 52px; }
+      .pos-body     { flex-direction: column; overflow: visible; }
+      .table-panel  { width: 100%; height: auto; max-height: 52vh; border-right: none; border-bottom: 1px solid #E8DBBF; }
+      .menu-panel   { width: 100%; }
+      .mob-tab-bar  { display: flex; }
+      .mob-hidden   { display: none !important; }
+      .pos-title    { display: none; }
+    }
+    @media (max-width: 480px) {
+      .pay-mode-tabs        { grid-template-columns: repeat(2, 1fr); border-radius: 12px; }
+      .pos-head             { padding: 0 12px; gap: 8px; }
+      .pos-right .clock-chip { display: none; }
+    }
+
     /* Customer modal */
     .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 50; display: flex; align-items: center; justify-content: center; padding: 16px; }
     .modal-box { background: #fff; border-radius: 14px; width: 100%; max-width: 440px; box-shadow: 0 8px 40px rgba(0,0,0,0.18); overflow: hidden; }
@@ -236,7 +266,7 @@ type PosTable = CafeTable & { orderId?: string; seatedAt?: string };
 
       <div class="pos-body">
         <!-- Left: Table map -->
-        <aside class="table-panel">
+        <aside class="table-panel" [class.mob-hidden]="mobilePosTab() !== 'tables'">
           <div class="tp-head">
             <div class="tp-title">Table Map</div>
             <button class="new-order-btn" (click)="handleNewOrder()">
@@ -283,7 +313,7 @@ type PosTable = CafeTable & { orderId?: string; seatedAt?: string };
         </aside>
 
         <!-- Right: Content panel -->
-        <main class="menu-panel">
+        <main class="menu-panel" [class.mob-hidden]="mobilePosTab() !== 'menu'">
           @if (!selectedTable()) {
             <div class="no-table">
               <app-icon name="star" [size]="34" [sw]="1.8" style="color:#B8923A"></app-icon>
@@ -548,6 +578,18 @@ type PosTable = CafeTable & { orderId?: string; seatedAt?: string };
           }
         </main>
       </div>
+
+      <!-- Mobile bottom tab bar -->
+      <nav class="mob-tab-bar">
+        <button class="mob-tab-btn" [class.active]="mobilePosTab() === 'tables'" (click)="mobilePosTab.set('tables')">
+          <app-icon name="table-2" [size]="18" [sw]="1.8"></app-icon>
+          Tables
+        </button>
+        <button class="mob-tab-btn" [class.active]="mobilePosTab() === 'menu'" (click)="mobilePosTab.set('menu')">
+          <app-icon name="utensils-crossed" [size]="18" [sw]="1.8"></app-icon>
+          Order
+        </button>
+      </nav>
 
       <!-- Payment modal (bottom sheet) -->
       @if (showPaymentModal()) {
@@ -824,6 +866,8 @@ export class PosComponent implements OnInit, OnDestroy {
   payError   = signal<string | null>(null);
   payNotice  = signal<string | null>(null);
 
+  mobilePosTab = signal<'tables' | 'menu'>('tables');
+
   // Misc
   notice      = signal<string | null>(null);
   currentTime = '';
@@ -972,6 +1016,7 @@ export class PosComponent implements OnInit, OnDestroy {
 
   selectTable(t: PosTable): void {
     this.selectedTable.set(t);
+    this.mobilePosTab.set('menu');
     this.cart.set([]);
     this.search.set('');
     this.activeCat.set(null);

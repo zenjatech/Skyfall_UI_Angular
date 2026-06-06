@@ -138,6 +138,19 @@ const FILTERS = ['All', 'Regular', 'New'] as const;
     .detail-row { display: flex; justify-content: space-between; gap: 12px; padding: 10px 14px; border-bottom: 1px solid #E8DBBF; font-size: 13px; &:last-child { border-bottom: 0; } }
     .detail-label { color: #7A7060; }
     .detail-value { font-weight: 500; color: #1A1A1A; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .kpi-grid   { grid-template-columns: repeat(2, 1fr); }
+      .search-wrap { width: 100%; }
+      .sc-head    { flex-direction: column; align-items: stretch; gap: 10px; padding: 12px 16px; }
+    }
+    @media (max-width: 600px) {
+      .kpi-grid   { grid-template-columns: 1fr; }
+      .sc         { overflow-x: auto; }
+      .data-table { min-width: 960px; }
+      .drawer     { width: 100vw; border-left: none; }
+    }
   `],
   template: `
     <div class="dash">

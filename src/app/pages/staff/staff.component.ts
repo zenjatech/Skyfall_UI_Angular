@@ -57,6 +57,13 @@ import { IconComponent } from '../../core/components/icon.component';
     .modal-footer { display: flex; gap: 8px; justify-content: flex-end; margin-top: 20px; padding-top: 16px; border-top: 1px solid #E8DBBF; }
     .btn-cancel { padding: 8px 16px; border-radius: 8px; border: 1px solid #E8DBBF; background: transparent; color: #7A7060; font-size: 13px; font-weight: 500; cursor: pointer; font-family: var(--font-body); &:hover { background: #FBF6EC; } }
     .btn-save { padding: 8px 16px; border-radius: 8px; border: none; background: #B8923A; color: #fff; font-size: 13px; font-weight: 500; cursor: pointer; font-family: var(--font-body); &:hover { background: #8A6A24; } }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .sc               { overflow-x: auto; }
+      .data-table       { min-width: 520px; }
+      .page-header      { flex-wrap: wrap; gap: 10px; }
+    }
   `],
   template: `
     <div class="wrap">

@@ -198,6 +198,22 @@ const MODE_META: Record<string, { icon: string; color: string }> = {
     }
     .table-num    { font-size: 12px; font-weight: 600; }
     .table-status { margin-top: 2px; font-size: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+
+    /* ── Responsive ── */
+    @media (max-width: 960px) {
+      .kpi-grid          { grid-template-columns: repeat(2, 1fr); }
+      .row-chart-kot     { grid-template-columns: 1fr; }
+      .row-orders-pay    { grid-template-columns: 1fr; }
+      .row-items-map     { grid-template-columns: 1fr; }
+      .table-grid        { grid-template-columns: repeat(4, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .kpi-grid          { grid-template-columns: 1fr; }
+      .kc-value          { font-size: 22px; }
+      .table-grid        { grid-template-columns: repeat(3, 1fr); }
+      .sc-head           { padding: 0 14px; min-height: 48px; }
+      .sc-body           { padding: 14px; }
+    }
   `],
   template: `
     <div class="dash">

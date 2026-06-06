@@ -74,6 +74,16 @@ const STATUS_FILTERS = [
     .spinner { width: 28px; height: 28px; border: 2px solid #E8DBBF; border-top-color: #B8923A; border-radius: 50%; animation: spin .7s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
 
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .filter-bar       { flex-direction: column; align-items: stretch; }
+      .filter-tabs      { overflow-x: auto; flex-wrap: nowrap; }
+      .filter-btn       { flex-shrink: 0; white-space: nowrap; }
+      .sc               { overflow-x: auto; }
+      .data-table       { min-width: 600px; }
+      .drawer           { width: 100vw; }
+    }
+
     /* Clickable row */
     .data-table tbody tr { cursor: pointer; }
 
